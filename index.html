@@ -5,51 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Servidor en Modo Stealth</title>
 <style>
-  /* Fondo matrix */
-  body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: black;
-    font-family: "Courier New", Courier, monospace;
-    color: #33ff33;
-  }
+  * {margin:0;padding:0;box-sizing:border-box;}
+  body, html {width:100%;height:100%;overflow:hidden;font-family:"Courier New", monospace;}
 
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
-  }
+  canvas {position:fixed;top:0;left:0;z-index:0;}
 
-  /* Terminal */
-  .terminal {
+  .terminal-container {
     position: relative;
     z-index: 1;
-    border: 2px solid #33ff33;
-    border-radius: 10px;
-    padding: 25px;
-    max-width: 700px;
-    margin: 100px auto;
-    background: rgba(0,0,0,0.9);
-    box-shadow: 0 0 25px #33ff33;
-    text-align: left;
-  }
-
-  .terminal p {
-    margin: 5px 0;
-  }
-
-  /* Glitch header */
-  h1.glitch {
-    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
     text-align: center;
-    position: relative;
     color: #33ff33;
+  }
+
+  h1.glitch {
+    font-size: 2.5em;
+    color: #33ff33;
+    position: relative;
     margin-bottom: 30px;
   }
-  h1.glitch::before,
-  h1.glitch::after {
+  h1.glitch::before, h1.glitch::after {
     content: attr(data-text);
     position: absolute;
     left: 0;
@@ -77,31 +57,38 @@
     65%{clip:rect(0,9999px,75px,0);}
   }
 
-  /* Cursor blink */
-  .blink {
-    display: inline-block;
-    width: 10px;
-    background: #33ff33;
-    animation: blink 1s steps(2, start) infinite;
-  }
-  @keyframes blink {
-    50% { background: transparent; }
+  .terminal {
+    border: 2px solid #33ff33;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.9);
+    padding: 25px;
+    max-width: 800px;
+    width: 90%;
+    box-shadow: 0 0 30px #33ff33;
+    text-align: left;
   }
 
-  /* Typewriter effect */
+  .terminal p {
+    margin: 5px 0;
+    font-size: 1.1em;
+  }
+
+  .blink { display:inline-block; width:10px; background:#33ff33; animation: blink 1s steps(2,start) infinite;}
+  @keyframes blink {50% { background: transparent; }}
+
   .typewriter span {
     display: inline-block;
     overflow: hidden;
     border-right: .15em solid #33ff33;
     white-space: nowrap;
-    animation: typing 3s steps(40, end) 1s forwards, blinkCaret .75s step-end infinite;
+    animation: typing 2.5s steps(50,end) 0.5s forwards, blinkCaret .75s step-end infinite;
   }
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-  @keyframes blinkCaret {
-    50% { border-color: transparent; }
+  @keyframes typing { from{width:0;} to{width:100%;} }
+  @keyframes blinkCaret {50%{border-color:transparent;}}
+
+  @media(max-width:600px){
+    h1.glitch{font-size:1.8em;}
+    .terminal p{font-size:0.95em;}
   }
 </style>
 </head>
@@ -109,19 +96,21 @@
 
 <h1 class="glitch" data-text="⚡ Servidor en Modo Stealth ⚡">⚡ Servidor en Modo Stealth ⚡</h1>
 
-<div class="terminal">
-  <p class="typewriter"><span>> Estado del servidor: <span style="color:red;">OFFLINE</span></span></p>
-  <p class="typewriter"><span>> Motivo: probablemente el admin <span style="color:yellow;">está durmiendo</span> 😴</span></p>
-  <p class="typewriter"><span>> Hackers en cola: <span style="color:cyan;">1337</span></span></p>
-  <p class="typewriter"><span>> Próxima conexión: en horario habil, vuelve en unas horas.</span></p>
-  <p class="blink"></p>
+<div class="terminal-container">
+  <div class="terminal">
+    <p class="typewriter"><span>> Estado del servidor: <span style="color:red;">OFFLINE</span></span></p>
+    <p class="typewriter"><span>> Motivo: el admin ha activado <span style="color:yellow;">modo stealth</span> 😴</span></p>
+    <p class="typewriter"><span>> Hackers en cola: <span style="color:cyan;">1337</span></span></p>
+    <p class="typewriter"><span>> Próxima conexión: estimada en <span style="color:magenta;">2 horas</span></span></p>
+    <p class="typewriter"><span>> Consejos: no intentes hackear 🛑, respeta la paz digital</span></p>
+    <p class="blink"></p>
+  </div>
+
+  <p style="margin-top:25px; color:gray;">
+    P.D: Esto no es un error... es un *feature* 🐱‍💻
+  </p>
 </div>
 
-<p style="margin-top:30px; color:gray; text-align:center;">
-  P.D: Esto no es un error... es una *feature* 🐱‍💻
-</p>
-
-<!-- Fondo Matrix -->
 <canvas id="matrix"></canvas>
 <script>
 const canvas = document.getElementById("matrix");
@@ -141,13 +130,18 @@ function draw() {
   ctx.font = fontSize + "px monospace";
 
   for(let i = 0; i < drops.length; i++){
-    const text = letters.charAt(Math.floor(Math.random() * letters.length));
+    const text = letters.charAt(Math.floor(Math.random()*letters.length));
     ctx.fillText(text, i*fontSize, drops[i]*fontSize);
     if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
     drops[i]++;
   }
 }
-setInterval(draw, 50);
+setInterval(draw,50);
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 </script>
 
 </body>
