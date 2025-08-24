@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ Servidor en Mantenimiento Nocturno ⚡</title>
+<title>⚡ Servidor en Modo Stealth ⚡</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -248,21 +248,21 @@ body, html {
 
 <div class="container">
   <div class="glitch-container">
-    <h1 class="glitch">SERVIDOR EN MANTENIMIENTO<span aria-hidden="true">SERVIDOR EN MANTENIMIENTO</span><span aria-hidden="true">SERVIDOR EN MANTENIMIENTO</span></h1>
+    <h1 class="glitch">Stealth mode server<span aria-hidden="true">Stealth mode server</span><span aria-hidden="true">Stealth mode server</span></h1>
   </div>
   
   <div class="terminal">
     <p class="terminal-line">Estado: <span class="status-offline">OFFLINE - MODO NOCTURNO ACTIVADO</span></p>
     <p class="terminal-line">Sistema: <span class="status-stealth">PROTOCOLO DE SEGURIDAD STEALTH</span></p>
     <p class="terminal-line">Intrusos detectados: <span class="status-hackers">0 - SISTEMA BLOQUEADO</span></p>
-    <p class="terminal-line">Tiempo estimado: <span class="status-time">06:00 AM - Hora local</span></p>
-    <p class="terminal-line">Proceso: <span class="status-reboot">LIMPIEZA Y OPTIMIZACIÓN NOCTURNA</span></p>
+    <p class="terminal-line">Tiempo estimado: <span class="status-time">08:00 AM - Hora local</span></p>
+    <p class="terminal-line">Proceso: <span class="status-reboot">Descanso Nocturno</span></p>
     
     <div class="progress-container">
       <div class="progress-bar"></div>
     </div>
     
-    <p class="terminal-line">Progreso de mantenimiento: <span class="status-time">INICIADO</span> <div class="cursor"></div></p>
+    <p class="terminal-line">Proceo de descanso: <span class="status-time">INICIADO</span> <div class="cursor"></div></p>
   </div>
   
   <div class="countdown">
@@ -271,7 +271,7 @@ body, html {
   
   <div class="footer">
     <p class="neon-text">⚠️ Este no es un error, es una característica de seguridad programada ⚠️</p>
-    <p>El servidor se reiniciará automáticamente al finalizar el mantenimiento</p>
+    <p>El servidor se reiniciará automáticamente al finalizar el MODO NOCTURNO</p>
   </div>
 </div>
 
@@ -320,7 +320,7 @@ function updateCountdown() {
     target.setDate(target.getDate() + 1);
   }
   
-  target.setHours(6, 0, 0, 0);
+  target.setHours(8, 0, 0, 0);
   
   const diff = target - now;
   const hours = Math.floor(diff / (1000 * 60 * 60));
